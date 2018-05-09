@@ -5,64 +5,67 @@
     <link rel="stylesheet" href="./lib/css/add_style.css" type="text/css" />
     <link rel="shortcut icon" href="./static/favicon.ICO" type="image/x-icon" />
     <title>发布信息</title>
-    <script src=lib/jquery-3.3.1.min.js></script>
-    <script src=lib/nebPay.js></script>
-    <script src=lib/nebulas.js></script>
+    
 </head>
+<script src=./lib/jquery-3.3.1.min.js></script>
+    <script src=./lib/nebPay.js></script>
+    <script src=./lib/nebulas.js></script>
+    <script>
+            var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+            var nebPay = new NebPay();
+            var serialNumber
+            var to = "n1hUvxLwRVuYY9EenUZGj9QVmyL3HgpysWu";
+            var value = "0";
+            var callFunction = "Add"
+        
+            function doSubmitForm() {
+                var na = document.getElementById('name');
+                var co = document.getElementById('college');
+                var de = document.getElementById('department');
+                var ag = document.getElementById('age');
+                var ti = document.getElementById('title');
+                var com = document.getElementById('comment');
+                var flag = 0;
+                if (!na.value || na.value === "") {
+                    flag = 1;
+                    alert("请输入导师姓名！");
+                }
+                if (!co.value || co.value === "") {
+                    flag = 1;
+                    alert("请输入导师所在学校！");
+                }
+                if (!de.value || de.value === "") {
+                    flag = 1;
+                    alert("请输入导师所在专业方向！");
+                }
+                if (!ag.value || ag.value === "") {
+                    flag = 1;
+                    alert("请输入导师年龄，若不知道请输入-1！");
+                }
+                if (!ti.value || ti.value === "") {
+                    flag = 1;
+                    alert("请输入导师职称，若不知道请输入未知！");
+                }
+                if (!com.value || com.value === "") {
+                    flag = 1;
+                    alert("请输入您对导师的评价，从科研经费，水平，学生前途等多方面评价！");
+                }
+                if (flag === 1) return;
+        
+                var callArgs = "[\"" + $("#name").val() + "\",\"" + $("#college").val() + "\",\"" + $("#department").val() + "\",\"" + $("#age").val() + "\",\"" + $("#title").val() + "\",\"" + $("#comment").val() + "\"]"
+                serialNumber = nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
+                    listener: cbPush        //设置listener, 处理交易返回信息
+                });
+                console.log("afterpay");
+                
+        
+            }
+        
+            function cbPush(resp) {
+                console.log("response of push: " + JSON.stringify(resp))
+            } 
+        </script>
 
-<script>
-    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
-    var nebPay = new NebPay();
-    var serialNumber
-    var to = "n1hUvxLwRVuYY9EenUZGj9QVmyL3HgpysWu";
-    var value = "0";
-    var callFunction = "Add"
-
-    function doSubmitForm() {
-        var na = document.getElementById('name');
-        var co = document.getElementById('college');
-        var de = document.getElementById('department');
-        var ag = document.getElementById('age');
-        var ti = document.getElementById('title');
-        var com = document.getElementById('comment');
-        var flag = 0;
-        if (!na.value || na.value === "") {
-            flag = 1;
-            alert("请输入导师姓名！");
-        }
-        if (!co.value || co.value === "") {
-            flag = 1;
-            alert("请输入导师所在学校！");
-        }
-        if (!de.value || de.value === "") {
-            flag = 1;
-            alert("请输入导师所在专业方向！");
-        }
-        if (!ag.value || ag.value === "") {
-            flag = 1;
-            alert("请输入导师年龄，若不知道请输入-1！");
-        }
-        if (!ti.value || ti.value === "") {
-            flag = 1;
-            alert("请输入导师职称，若不知道请输入未知！");
-        }
-        if (!com.value || com.value === "") {
-            flag = 1;
-            alert("请输入您对导师的评价，从科研经费，水平，学生前途等多方面评价！");
-        }
-        if (flag === 1) return;
-
-        var callArgs = "[\"" + $("#name").val() + "\",\"" + $("#college").val() + "\",\"" + $("#department").val() + "\",\"" + $("#age").val() + "\",\"" + $("#title").val() + "\",\"" + $("#comment").val() + "\"]"
-        serialNumber = nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
-            listener: cbPush        //设置listener, 处理交易返回信息
-        });
-
-    }
-
-    function cbPush(resp) {
-        console.log("response of push: " + JSON.stringify(resp))
-    } 
-</script>
 
 <body>
     <div class="top">
@@ -94,6 +97,9 @@
             <fieldset>
                 <input placeholder="导师职称" type="title" tabindex="4" id="title" required>
             </fieldset>
+            <fieldset>
+                    <input placeholder="导师职称" type="department" tabindex="4" id="department" required>
+                </fieldset>
             <fieldset>
                 <textarea placeholder="请输入您对导师的评价，从科研经费，水平，学生前途等多方面评价！" tabindex="5" id="comment" required></textarea>
             </fieldset>

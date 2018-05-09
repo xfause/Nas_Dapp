@@ -14,7 +14,7 @@ a {
 	position:relative;
 }
 
-#submit_information input[type="text"], #submit_information input[type="college"], #submit_information input[type="age"], #submit_information input[type="title"], #submit_information textarea, #submit_information button[type="submit"] { font:400 12px/16px "Open Sans", Helvetica, Arial, sans-serif; }
+#submit_information input[type="text"], #submit_information input[type="college"], #submit_information input[type="age"], #submit_information input[type="title"], #submit_information input[type="department"], #submit_information textarea, #submit_information button[type="submit"] { font:400 12px/16px "Open Sans", Helvetica, Arial, sans-serif; }
 
 #submit_information {
 	background:#F9F9F9;
@@ -43,7 +43,7 @@ fieldset {
 	width: 100%;
 }
 
-#submit_information input[type="text"], #submit_information input[type="college"], #submit_information input[type="age"], #submit_information input[type="title"], #submit_information textarea {
+#submit_information input[type="text"], #submit_information input[type="college"], #submit_information input[type="age"], #submit_information input[type="title"], #submit_information input[type="department"],#submit_information textarea {
 	width:100%;
 	border:1px solid #CCC;
 	background:#FFF;
@@ -78,7 +78,7 @@ fieldset {
 	background: #000;
 }
 
-#submit_information input[type="text"]:hover, #submit_information input[type="college"]:hover, #submit_information input[type="age"]:hover, #submit_information input[type="title"]:hover, #submit_information textarea:hover {
+#submit_information input[type="text"]:hover, #submit_information input[type="college"]:hover, #submit_information input[type="age"]:hover, #submit_information input[type="title"],#submit_information input[type="department"]:hover, #submit_information textarea:hover {
 	-webkit-transition:border-color 0.3s ease-in-out;
 	-moz-transition:border-color 0.3s ease-in-out;
 	transition:border-color 0.3s ease-in-out;
